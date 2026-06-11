@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vedant Chaturvedi – SAP Consultant & Trainer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --steel: #1E3A5F;
+    --blue: #2563EB;
+    --blue-light: #3B82F6;
+    --gold: #F59E0B;
+    --gold-light: #FCD34D;
+    --off-white: #F8FAFC;
+    --muted: #94A3B8;
+    --text: #E2E8F0;
+    --card-bg: #112240;
+    --border: rgba(37, 99, 235, 0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(10, 22, 40, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; color: var(--muted); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-canvas {
+    position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.18;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+  .hero-eyebrow {
+    font-size: 0.8rem; letter-spacing: 0.15em; color: var(--gold);
+    text-transform: uppercase; font-weight: 600; margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700; line-height: 1.08;
+    color: #fff; margin-bottom: 0.5rem;
+  }
+  .hero-name span { color: var(--blue-light); }
+  .hero-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--gold); font-weight: 500; margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    font-size: 1rem; color: var(--muted); max-width: 540px;
+    line-height: 1.75; margin-bottom: 2.5rem;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem; font-weight: 700; color: #fff; display: block;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    padding: 0.75rem 1.75rem; border-radius: 6px;
+    text-decoration: none; font-size: 0.9rem; font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+  .btn-ghost {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.75rem 1.75rem; border-radius: 6px;
+    text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SECTION ── */
+  section { padding: 5rem 2.5rem; max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; color: var(--blue-light); letter-spacing: 0.15em;
+    text-transform: uppercase; font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700; color: #fff; margin-bottom: 1rem;
+  }
+  .section-divider {
+    width: 48px; height: 3px; background: var(--gold);
+    border-radius: 2px; margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .about-text p { color: var(--muted); font-size: 0.97rem; line-height: 1.85; margin-bottom: 1rem; }
+  .about-avatar {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-circle {
+    width: 200px; height: 200px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--steel), #0f3460);
+    border: 3px solid var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    box-shadow: 0 0 60px rgba(37,99,235,0.25);
+  }
+  .avatar-initials {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3rem; font-weight: 700; color: #fff; letter-spacing: 0.05em;
+  }
+  .avatar-sub { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 2.75rem; }
+  .tl-dot {
+    position: absolute; left: -2.45rem; top: 0.4rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--blue); border: 2px solid var(--navy);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.3);
+  }
+  .tl-period {
+    font-size: 0.75rem; color: var(--gold); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .tl-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.25rem;
+  }
+  .tl-org { font-size: 0.85rem; color: var(--blue-light); margin-bottom: 0.5rem; }
+  .tl-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .skill-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .skill-category {
+    font-size: 0.72rem; color: var(--gold); text-transform: uppercase;
+    letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.75rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3);
+    color: var(--blue-light); font-size: 0.78rem;
+    padding: 0.25rem 0.65rem; border-radius: 4px; font-weight: 500;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem 2.25rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start;
+  }
+  .edu-icon {
+    width: 52px; height: 52px; background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.3); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+  }
+  .edu-degree {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem;
+  }
+  .edu-uni { font-size: 0.9rem; color: var(--blue-light); margin-bottom: 0.25rem; }
+  .edu-year { font-size: 0.8rem; color: var(--gold); font-weight: 600; }
+
+  /* ── TRAINING HIGHLIGHTS ── */
+  .training-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .training-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .training-card:hover { border-color: var(--gold); }
+  .tc-icon {
+    font-size: 1.75rem; margin-bottom: 0.85rem; display: block;
+  }
+  .tc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem;
+  }
+  .tc-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+  .contact-box {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 3rem;
+    max-width: 560px; margin: 0 auto;
+  }
+  .contact-box p { color: var(--muted); margin-bottom: 2rem; font-size: 0.97rem; line-height: 1.75; }
+  .contact-info { margin-bottom: 2rem; }
+  .contact-row {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 0.75rem; justify-content: center;
+  }
+  .contact-row span { font-size: 0.9rem; color: var(--text); }
+  .contact-row .icon { font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.8rem;
+  }
+
+  /* ── ANIMATED GRID CANVAS ── */
+  @keyframes pulse { 0%, 100% { opacity: 0.18; } 50% { opacity: 0.32; } }
+  .hero-canvas { animation: pulse 8s ease-in-out infinite; }
+
+  @media (max-width: 680px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    #hero { padding: 5rem 1.25rem 3rem; }
+    section { padding: 3.5rem 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-avatar { order: -1; }
+    .edu-card { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Animated circuit grid SVG -->
+  <svg class="hero-canvas" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#2563EB" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="1200" height="700" fill="url(#grid)"/>
+    <circle cx="120" cy="120" r="4" fill="#2563EB"/>
+    <circle cx="300" cy="60" r="4" fill="#F59E0B"/>
+    <circle cx="480" cy="180" r="4" fill="#2563EB"/>
+    <circle cx="660" cy="60" r="4" fill="#2563EB"/>
+    <circle cx="840" cy="120" r="4" fill="#F59E0B"/>
+    <circle cx="60" cy="300" r="4" fill="#2563EB"/>
+    <circle cx="240" cy="240" r="4" fill="#2563EB"/>
+    <circle cx="540" cy="300" r="4" fill="#F59E0B"/>
+    <line x1="120" y1="120" x2="300" y2="60" stroke="#2563EB" stroke-width="1"/>
+    <line x1="300" y1="60" x2="480" y2="180" stroke="#2563EB" stroke-width="1"/>
+    <line x1="480" y1="180" x2="660" y2="60" stroke="#F59E0B" stroke-width="1"/>
+    <line x1="660" y1="60" x2="840" y2="120" stroke="#2563EB" stroke-width="1"/>
+    <line x1="60" y1="300" x2="240" y2="240" stroke="#2563EB" stroke-width="1"/>
+    <line x1="240" y1="240" x2="480" y2="180" stroke="#2563EB" stroke-width="1"/>
+    <line x1="240" y1="240" x2="540" y2="300" stroke="#F59E0B" stroke-width="1"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">SAP Consultant &amp; Trainer</p>
+    <h1 class="hero-name">Vedant<br/><span>Chaturvedi</span></h1>
+    <p class="hero-role">SAP Fiori · SAPUI5 · RAP · CAP</p>
+    <p class="hero-desc">
+      Building enterprise-grade SAP applications and empowering the next generation of SAP developers. 
+      5 years of hands-on consulting experience, 8+ years of expert-level training across SAP Fiori, UI5, RAP, and CAPM.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">13+</span>
+        <span class="stat-label">Years in SAP</span>
+      </div>
+      <div>
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Years Training</span>
+      </div>
+      <div>
+        <span class="stat-num">5</span>
+        <span class="stat-label">Years Consulting</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-ghost">View Experience</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Who I Am</p>
+  <h2 class="section-title">About Me</h2>
+  <div class="section-divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm Vedant Chaturvedi, an SAP specialist based in Ratlam, Madhya Pradesh, India. 
+        With a strong foundation in Computer Science Engineering from Sri Aurobindo Institute of Technology (2009–2013), 
+        I built a career at the intersection of enterprise technology and modern UI development.
+      </p>
+      <p>
+        From 2014 to 2019, I worked as an SAP Consultant where I designed and delivered SAP Fiori and SAPUI5 solutions 
+        for enterprise clients. After consulting, I transitioned into a full-time training role — channelling over a 
+        decade of expertise into helping developers master SAP's modern development stack.
+      </p>
+      <p>
+        Today I train professionals and students in SAP Fiori, SAPUI5, the RESTful Application Programming model (RAP), 
+        and Cloud Application Programming Model (CAPM) — technologies that define the future of SAP development.
+      </p>
+    </div>
+    <div class="about-avatar">
+      <div class="avatar-circle">
+        <span class="avatar-initials">VC</span>
+        <span class="avatar-sub">SAP Expert</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">My Journey</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="section-divider"></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-period">2019 – Present · 8+ Years</p>
+      <p class="tl-title">Senior SAP Trainer</p>
+      <p class="tl-org">Independent Training &amp; Coaching</p>
+      <p class="tl-desc">
+        Delivering expert-level training in SAP Fiori, SAPUI5, RAP (RESTful Application Programming Model), 
+        and CAPM (Cloud Application Programming Model). Mentoring developers and SAP consultants to build 
+        modern, cloud-ready SAP applications. Curriculum design, live sessions, and project-based learning.
+      </p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-period">2014 – 2019 · 5 Years</p>
+      <p class="tl-title">SAP Consultant – Fiori &amp; SAPUI5</p>
+      <p class="tl-org">SAP Consulting</p>
+      <p class="tl-desc">
+        Designed, developed, and deployed SAP Fiori applications and SAPUI5 components for enterprise clients. 
+        Worked across full project lifecycles — from requirement gathering and UI/UX design to backend OData 
+        service integration and production rollout. Collaborated with cross-functional teams on S/4HANA implementations.
+      </p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background: var(--gold);"></div>
+      <p class="tl-period">2009 – 2013</p>
+      <p class="tl-title">B.E. in Computer Science Engineering</p>
+      <p class="tl-org">Sri Aurobindo Institute of Technology</p>
+      <p class="tl-desc">
+        Completed a four-year undergraduate programme in Computer Science Engineering, building a strong 
+        foundation in programming, systems design, databases, and software engineering principles.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Technical Expertise</p>
+  <h2 class="section-title">Skills &amp; Technologies</h2>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <p class="skill-category">SAP Frontend</p>
+      <div class="skill-tags">
+        <span class="skill-tag">SAP Fiori</span>
+        <span class="skill-tag">SAPUI5</span>
+        <span class="skill-tag">Fiori Elements</span>
+        <span class="skill-tag">Fiori Launchpad</span>
+        <span class="skill-tag">OData V2/V4</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">SAP Modern Dev</p>
+      <div class="skill-tags">
+        <span class="skill-tag">SAP RAP</span>
+        <span class="skill-tag">CAPM / CAP</span>
+        <span class="skill-tag">BTP</span>
+        <span class="skill-tag">SAP Cloud Foundry</span>
+        <span class="skill-tag">CDS Views</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">Web Technologies</p>
+      <div class="skill-tags">
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML5 / CSS3</span>
+        <span class="skill-tag">XML</span>
+        <span class="skill-tag">JSON</span>
+        <span class="skill-tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">SAP Backend</p>
+      <div class="skill-tags">
+        <span class="skill-tag">ABAP</span>
+        <span class="skill-tag">S/4HANA</span>
+        <span class="skill-tag">SAP Gateway</span>
+        <span class="skill-tag">BOPF</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">Tools &amp; Dev Env</p>
+      <div class="skill-tags">
+        <span class="skill-tag">SAP BAS</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Eclipse IDE</span>
+        <span class="skill-tag">SAP WebIDE</span>
+        <span class="skill-tag">Git</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">Training &amp; Soft Skills</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Curriculum Design</span>
+        <span class="skill-tag">Project Mentoring</span>
+        <span class="skill-tag">Live Coaching</span>
+        <span class="skill-tag">Technical Writing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section id="training">
+  <p class="section-label">What I Teach</p>
+  <h2 class="section-title">Training Programs</h2>
+  <div class="section-divider"></div>
+  <div class="training-cards">
+    <div class="training-card">
+      <span class="tc-icon">🎨</span>
+      <p class="tc-title">SAP Fiori &amp; SAPUI5</p>
+      <p class="tc-desc">
+        End-to-end training from SAPUI5 basics to advanced Fiori app development. Covers MVC patterns, 
+        OData bindings, Fiori Elements, and responsive design for enterprise UX.
+      </p>
+    </div>
+    <div class="training-card">
+      <span class="tc-icon">⚙️</span>
+      <p class="tc-title">SAP RAP</p>
+      <p class="tc-desc">
+        RESTful Application Programming Model — building transactional apps on S/4HANA. 
+        Covers behavior definitions, CDS data models, ABAP test cockpit, and draft handling.
+      </p>
+    </div>
+    <div class="training-card">
+      <span class="tc-icon">☁️</span>
+      <p class="tc-title">SAP CAPM / CAP</p>
+      <p class="tc-desc">
+        Cloud Application Programming Model for building services on SAP BTP. 
+        Covers Node.js and Java CAP, CDS schema, SAP HANA integration, and deployment on Cloud Foundry.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="section-divider"></div>
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <p class="edu-degree">Bachelor of Engineering — Computer Science</p>
+      <p class="edu-uni">Sri Aurobindo Institute of Technology</p>
+      <p class="edu-year">2009 – 2013</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="section-divider" style="margin: 0 auto 3rem;"></div>
+  <div class="contact-box">
+    <p>
+      Whether you're a developer looking to master SAP Fiori, a business seeking an SAP consultant, 
+      or an institution exploring training partnerships — I'd love to hear from you.
+    </p>
+    <div class="contact-info">
+      <div class="contact-row">
+        <span class="icon">📍</span>
+        <span>Ratlam, Madhya Pradesh, India</span>
+      </div>
+      <div class="contact-row">
+        <span class="icon">💼</span>
+        <span>SAP Fiori · SAPUI5 · RAP · CAP Trainer</span>
+      </div>
+    </div>
+    <a href="mailto:vedant@example.com" class="btn-primary" style="display: inline-block;">Send a Message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Vedant Chaturvedi · SAP Consultant &amp; Trainer · Ratlam, India</p>
+  <p style="margin-top: 0.5rem; font-size: 0.75rem;">Built with passion for SAP excellence</p>
+</footer>
+
+</body>
+</html>
